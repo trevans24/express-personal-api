@@ -93,7 +93,24 @@ app.get('/api/cars/:id', function(req,res){
   });
 });
 
-
+//post a new car
+app.post('/api/cars', function(req,res){
+  var newCar = new db.Car({
+    year: req.body.year,
+    make: req.body.make,
+    model: req.body.model,
+    transmission: req.body.transmission,
+    personal_top_speed: req.body.personal_top_speed,
+    image: req.body.image
+  });
+  newCar.save(function(err, car){
+    if (err) {
+      return console.log("save error: " + err);
+    }
+    console.log("saved ", car.model);
+    res.json(car);
+  });
+});
 
 /**********
  * SERVER *
