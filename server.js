@@ -112,6 +112,19 @@ app.post('/api/cars', function(req,res){
   });
 });
 
+//update a new car
+app.put('/api/todos/:id', function(req, res){
+  db.Car.findOne({_id: req.params.id}, function(err, data){
+    car.body.year = req.body.year;
+    car.body.make = req.body.make;
+    car.body.model = req.body.model;
+    car.body.transmission = req.body.transmission;
+    car.body.personal_top_speed = req.body.personal_top_speed;
+    car.body.image = req.body.image;
+    res.json(req.body);
+  });
+});
+
 /**********
  * SERVER *
  **********/
