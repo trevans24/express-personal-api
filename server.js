@@ -130,6 +130,7 @@ app.put('/api/cars/:id', function(req, res){
     res.json(updateCar);
   });
 });
+});
 
 /**********
  * SERVER *
