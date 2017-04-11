@@ -86,6 +86,15 @@ app.get('/api/cars', function(req,res){
     });
 });
 
+//get one car
+app.get('/api/cars/:id', function(req,res){
+  db.Car.findOne({_id: req.params.id}, function(err, data){
+    res.json(data);
+  });
+});
+
+
+
 /**********
  * SERVER *
  **********/
