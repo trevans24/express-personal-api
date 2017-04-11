@@ -113,7 +113,7 @@ app.post('/api/cars', function(req,res){
 });
 
 //update a new car
-app.put('/api/todos/:id', function(req, res){
+app.put('/api/cars/:id', function(req, res){
   db.Car.findOne({_id: req.params.id}, function(err, data){
     car.body.year = req.body.year;
     car.body.make = req.body.make;
