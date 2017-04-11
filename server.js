@@ -79,8 +79,11 @@ app.get('/api/profile', function(req,res){
 
 //get all cars
 app.get('/api/cars', function(req,res){
-  db.Car.find();
-  res.json(cars);
+  db.Car.find()
+    .exec(function(err, cars){
+      if (err) {console.log("error: ", err); }
+     res.json(cars);
+    });
 });
 
 /**********
