@@ -17,7 +17,14 @@
 
 var db = require('./models');
 
-var car_list = [
+db.Car.remove({}, function(err, cars){
+	if (err){
+		console.log(err);
+	}
+	console.log('Removed all Cars');
+});
+
+var cars = [
 {
 	year: 1967,
 	make: "Ford",
@@ -84,29 +91,27 @@ var car_list = [
 }
 ];
 
-var motorcycle_list = [
-{
-	year: 2004,
-	make: "Suzuki",
-	model: "GSX-R 600",
-	personal_top_speed: 130 
-},
-{
-	year: 2006,
-	make: "Suzuki",
-	model: "GSX-R 1000",
-	personal_top_speed: 145 
-}
-];
+// var motorcycle_list = [
+// {
+// 	year: 2004,
+// 	make: "Suzuki",
+// 	model: "GSX-R 600",
+// 	personal_top_speed: 130 
+// },
+// {
+// 	year: 2006,
+// 	make: "Suzuki",
+// 	model: "GSX-R 1000",
+// 	personal_top_speed: 145 
+// }
+// ];
 
-db.Car.remove({}, function(err, cars){
-	console.log('Removed all Cars');
-	db.Car.create(car_list, function(err, cars){
-		if (err){
-			console.log(err);
-			return;
-		}
-		console.log('recreated all Cars');
-		console.log('created', cars.lenght, "cars");
-	});
+db.Car.create(cars, function(err, cars){
+	if (err){
+		return console.log(err);
+	} else {
+	console.log('recreated all Cars');
+	console.log('created', cars);
+	process.exit();
+}
 });
