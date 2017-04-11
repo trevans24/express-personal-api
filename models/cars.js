@@ -6,7 +6,8 @@ var CarSchema = new Schema({
 	make: String,
 	model: String,
 	transmission: String,
-	personal_top_speed: Number
+	personal_top_speed: Number,
+	image: String
 });
 
 var Car = mongoose.model('Car', CarSchema);
