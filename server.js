@@ -114,29 +114,21 @@ app.post('/api/cars', function(req,res){
 
 //update a new car
 app.put('/api/cars/:id', function(req, res){
-  db.Car.findOneAndUpdate({_id: req.params.id}, function(err, data){
-    console.log(req.body);
-    console.log(req.body._id);
-    console.log(req.params.id);
-    var updateCar = new db.Car({
-      year: req.body.year,
-      make: req.body.make,
-      model: req.body.model,
-      transmission: req.body.transmission,
-      personal_top_speed: req.body.personal_top_speed,
-      image: req.body.image
-    });
-    updateCar.save(function(err, updateCar){
+  db.Car.findOne({_id: req.params.id}, function(err, car){
+      car.year = req.body.year;
+      car.make = req.body.make;
+      car.model = req.body.model;
+      car.transmission = req.body.transmission;
+      car.personal_top_speed = req.body.personal_top_speed;
+      car.image = req.body.image;
+    car.save(function(err, car){
       if (err){
         return console.log("Update error: " + err);
       }
       console.log(car);
-      console.log(updateCar);
       console.log("Updated ", car.model);
-      res.json(updateCar);
-      res.end();
+      res.json(car);
     });
-    res.end();
   });
 });
 
