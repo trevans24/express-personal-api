@@ -114,27 +114,40 @@ app.post('/api/cars', function(req,res){
 
 //update a new car
 app.put('/api/cars/:id', function(req, res){
-  db.Car.findOne({_id: req.params.id}, function(err, data){
-    var updateCar = req.body;
+  db.Car.findOneAndUpdate({_id: req.params.id}, function(err, data){
     console.log(req.body);
-    console.log(updateCar);
+    console.log(req.body._id);
     console.log(req.params.id);
-    car.body.year = req.body.year;
-    car.body.make = req.body.make;
-    car.body.model = req.body.model;
-    car.body.transmission = req.body.transmission;
-    car.body.personal_top_speed = req.body.personal_top_speed;
-    car.body.image = req.body.image;
-    updateCar.save(function(err, car){
+    var updateCar = new db.Car({
+      year: req.body.year,
+      make: req.body.make,
+      model: req.body.model,
+      transmission: req.body.transmission,
+      personal_top_speed: req.body.personal_top_speed,
+      image: req.body.image
+    });
+    updateCar.save(function(err, updateCar){
       if (err){
-        console.log("update error: " + err);
+        return console.log("Update error: " + err);
       }
-    console.log("updated car!");
-    res.json(updateCar);
+      console.log(car);
+      console.log(updateCar);
+      console.log("Updated ", car.model);
+      res.json(updateCar);
+      res.end();
+    });
+    res.end();
   });
 });
-});
 
+//delete car
+app.delete('/api/cars/:id', function(req,res){
+  console.log('Cars deleted', req.params);
+  var carId = req.params.id;
+  db.Car.findOneAndRemove({_id: carId}, function(err, deletedCar){
+    res.json(deletedCar);
+  });
+});
 /**********
  * SERVER *
  **********/
