@@ -116,6 +116,9 @@ app.post('/api/cars', function(req,res){
 app.put('/api/cars/:id', function(req, res){
   db.Car.findOne({_id: req.params.id}, function(err, data){
     var updateCar = req.body;
+    console.log(req.body);
+    console.log(updateCar);
+    console.log(req.params.id);
     car.body.year = req.body.year;
     car.body.make = req.body.make;
     car.body.model = req.body.model;
